@@ -8,41 +8,48 @@ interface GroupProps {
   cards: CardType[];
   addCard: (groupId: string) => void;
   dragAndDrop: (id: string, x: number, y: number) => void;
+  onCardClick: (id: string) => void;
+  selectedCardId: string | null;
 }
 
-export default function Group({ group, cards, addCard, dragAndDrop }: GroupProps) {
-  const isLimitReached = cards.length >= 3;
-
+export default function Group({
+  group,
+  cards,
+  addCard,
+  dragAndDrop,
+  onCardClick,
+  selectedCardId,
+}: GroupProps) {
   const { handleMouseDown } = useDraggable({ x: group.x, y: group.y }, dragAndDrop, group.id);
 
   return (
     <div
       onMouseDown={handleMouseDown}
-      className={`absolute bg-gray-100 p-4 rounded-2xl w-80 flex flex-col`}
+      className="absolute bg-gray-100 p-4 rounded-2xl w-80 flex flex-col shadow-md"
       style={{
         left: group.x,
         top: group.y,
-        cursor: 'cell',
+        cursor: 'grab',
       }}
     >
       <h2 className="font-bold text-gray-700 mb-4 px-1 text-center select-none">{group.title}</h2>
 
-      <div className="flex-1 overflow-y-auto pr-1 max-h-[60vh]">
+      <div className="flex-1 overflow-y-auto pr-1 ">
         {cards.map(card => (
-          <div key={card.id} className="card-item">
-            <CardComponent card={card} />
-          </div>
+          <CardComponent
+            key={card.id}
+            card={card}
+            onClick={onCardClick}
+            isSelected={selectedCardId === card.id}
+          />
         ))}
-        {cards.length === 0 && (
-          <p className="text-gray-400 text-xs text-center py-8 italic">No cards yet!</p>
-        )}
       </div>
 
       <CreateButton
         onClick={() => addCard(group.id)}
-        label={isLimitReached ? 'No more cards!' : '+ Add card'}
+        label={cards.length >= 5 ? 'Limit reached' : '+ Add card'}
         variant="card"
-        disabled={isLimitReached}
+        disabled={cards.length >= 5}
       />
     </div>
   );

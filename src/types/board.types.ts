@@ -12,8 +12,13 @@ export interface Group {
   x: number;
   y: number;
 }
+export interface Edge {
+  from: string;
+  to: string;
+}
 
 export interface BoardState {
   groups: Group[];
   cards: Card[];
+  nodes: Edge[];
 }
