@@ -16,7 +16,7 @@ function App() {
               addCard={addCards}
             />
           ))}
-          <CreateButton addGroups={addGroups} />
+          <CreateButton label="Create Group" variant="group" onClick={addGroups} />
         </div>
       </div>
     </>

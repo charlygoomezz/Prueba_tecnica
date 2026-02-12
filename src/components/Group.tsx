@@ -1,5 +1,6 @@
 import type { Card as CardType, Group as GroupType } from '../types/board.types';
 import CardComponent from './Card'; // Importación directa del componente
+import CreateButton from './CreateButton';
 
 interface GroupProps {
   group: GroupType;
@@ -20,13 +21,7 @@ export default function Group({ group, cards, addCard }: GroupProps) {
           <p className="text-gray-400 text-xs text-center py-4">No cards yet!</p>
         )}
       </div>
-
-      <button
-        onClick={() => addCard(group.id)}
-        className="mt-4 w-full py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm font-bold transition-colors"
-      >
-        + Create card
-      </button>
+      <CreateButton onClick={() => addCard(group.id)} label="+ Add card" variant="card" />
     </div>
   );
 }
