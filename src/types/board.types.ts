@@ -2,7 +2,8 @@ export interface Card {
   id: string;
   groupId: string;
   name: string;
-  text: string;
+  username: string;
+  colorId: string;
 }
 
 export interface Group {
