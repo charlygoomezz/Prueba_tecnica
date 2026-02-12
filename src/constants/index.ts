@@ -5,3 +5,13 @@ export const CARD_GRADIENTS = [
   { id: 'purple', classes: 'bg-linear-to-br from-purple-600 to-blue-500', label: 'Galaxy' },
   { id: 'dark', classes: 'bg-linear-to-br from-gray-700 to-gray-900', label: 'Night' },
 ];
+
+export const NAMES = [
+  'Alex Rivera',
+  'Lucía Sanz',
+  'Marc Volov',
+  'Elena Gari',
+  'Erik Chen',
+  'Sara Miller',
+];
+export const USERNAMES = ['@arivera', '@lucia_s', '@mvolov', '@elena_g', '@echen', '@smiller'];
