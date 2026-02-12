@@ -13,7 +13,7 @@ export const useBoard = () => {
     const newGroup: Group = {
       id: uuidv4(),
       title: `Group ${groups.length + 1}`,
-      x: 100 + groups.length * 300,
+      x: 50 + groups.length * 340,
       y: 100,
     };
     setGroups([...groups, newGroup]);

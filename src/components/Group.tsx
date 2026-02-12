@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useDraggable } from '../hooks/useDraggable';
 import type { Card as CardType, Group as GroupType } from '../types/board.types';
-import CardComponent from './Card'; // Importación directa del componente
+import CardComponent from './Card';
 import CreateButton from './CreateButton';
 
 interface GroupProps {
@@ -11,46 +11,36 @@ interface GroupProps {
 }
 
 export default function Group({ group, cards, addCard, dragAndDrop }: GroupProps) {
-  const [dragging, setDragging] = useState(false);
   const isLimitReached = cards.length >= 3;
 
-  const handleMouseDown = () => {
-    setDragging(true);
-  };
-
-  const handleMouseUp = () => {
-    setDragging(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!dragging) return;
-
-    dragAndDrop(group.id, e.clientX - 150, e.clientY - 50);
-  };
+  const { handleMouseDown } = useDraggable({ x: group.x, y: group.y }, dragAndDrop, group.id);
 
   return (
     <div
-      id={group.id}
       onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseMove={handleMouseMove}
-      className="absolute bg-gray-100 p-4 rounded-xl w-80 flex flex-col cursor-move"
-      style={{ left: group.x, top: group.y }}
+      className={`absolute bg-gray-100 p-4 rounded-2xl w-80 flex flex-col`}
+      style={{
+        left: group.x,
+        top: group.y,
+        cursor: 'cell',
+      }}
     >
-      <h2 className="font-bold text-gray-700 mb-4 px-1 text-center">{group.title}</h2>
+      <h2 className="font-bold text-gray-700 mb-4 px-1 text-center select-none">{group.title}</h2>
 
-      <div className="flex-1 overflow-y-auto pr-1">
+      <div className="flex-1 overflow-y-auto pr-1 max-h-[60vh]">
         {cards.map(card => (
-          <CardComponent key={card.id} card={card} />
+          <div key={card.id} className="card-item">
+            <CardComponent card={card} />
+          </div>
         ))}
         {cards.length === 0 && (
-          <p className="text-gray-400 text-xs text-center py-4">No cards yet!</p>
+          <p className="text-gray-400 text-xs text-center py-8 italic">No cards yet!</p>
         )}
       </div>
 
       <CreateButton
         onClick={() => addCard(group.id)}
-        label={isLimitReached ? 'No more cards' : '+ Add card'}
+        label={isLimitReached ? 'No more cards!' : '+ Add card'}
         variant="card"
         disabled={isLimitReached}
       />
