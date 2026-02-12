@@ -4,6 +4,8 @@
 
 This project is a simple and modern Kanban board built with React, TypeScript, and Vite. It allows you to create groups (columns), add cards to each group, and visually link cards using edges. The UI is styled with TailwindCSS and supports drag-and-drop for groups and cards.
 
+This project was carried out by Carlos Gómez Prosper
+
 ## Features
 
 - ⚡️ Fast development with Vite and HMR
