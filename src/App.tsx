@@ -8,8 +8,8 @@ function App() {
     useBoard();
 
   return (
-    <div className="min-h-screen bg-white p-8 relative overflow-hidden">
-      <div className="relative z-10 flex gap-6 items-start">
+    <div className="min-h-screen bg-white p-8 relative overflow-x-auto overflow-y-hidden">
+      <div className="relative z-10 flex flex-wrap gap-6 items-start">
         {groups.map(group => (
           <Group
             key={group.id}
