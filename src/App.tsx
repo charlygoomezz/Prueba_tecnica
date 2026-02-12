@@ -3,7 +3,7 @@ import Group from './components/Group';
 import { useBoard } from './hooks/useBoard';
 
 function App() {
-  const { groups, cards, addGroups, addCards } = useBoard();
+  const { groups, cards, addGroups, addCards, dragAndDrop } = useBoard();
   return (
     <>
       <div className="min-h-screen bg-white p-8 overflow-x-auto">
@@ -14,6 +14,7 @@ function App() {
               group={group}
               cards={cards.filter(c => c.groupId === group.id)}
               addCard={addCards}
+              dragAndDrop={dragAndDrop}
             />
           ))}
           <CreateButton label="Create Group" variant="group" onClick={addGroups} />

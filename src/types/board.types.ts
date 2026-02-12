@@ -9,6 +9,8 @@ export interface Card {
 export interface Group {
   id: string;
   title: string;
+  x: number;
+  y: number;
 }
 
 export interface BoardState {

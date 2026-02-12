@@ -13,9 +13,10 @@ export const useBoard = () => {
     const newGroup: Group = {
       id: uuidv4(),
       title: `Group ${groups.length + 1}`,
+      x: 100 + groups.length * 300,
+      y: 100,
     };
     setGroups([...groups, newGroup]);
-    console.log('grupo creado');
   };
 
   const addCards = (groupId: string) => {
@@ -29,10 +30,15 @@ export const useBoard = () => {
     setCards([...cards, newCard]);
   };
 
+  const dragAndDrop = (id: string, x: number, y: number) => {
+    setGroups(prev => prev.map(group => (group.id === id ? { ...group, x, y } : group)));
+  };
+
   return {
     addGroups,
     groups,
     addCards,
     cards,
+    dragAndDrop,
   };
 };
