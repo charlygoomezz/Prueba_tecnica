@@ -12,6 +12,7 @@ interface GroupProps {
 
 export default function Group({ group, cards, addCard, dragAndDrop }: GroupProps) {
   const [dragging, setDragging] = useState(false);
+  const isLimitReached = cards.length >= 3;
 
   const handleMouseDown = () => {
     setDragging(true);
@@ -47,7 +48,12 @@ export default function Group({ group, cards, addCard, dragAndDrop }: GroupProps
         )}
       </div>
 
-      <CreateButton onClick={() => addCard(group.id)} label="+ Add card" variant="card" />
+      <CreateButton
+        onClick={() => addCard(group.id)}
+        label={isLimitReached ? 'No more cards' : '+ Add card'}
+        variant="card"
+        disabled={isLimitReached}
+      />
     </div>
   );
 }

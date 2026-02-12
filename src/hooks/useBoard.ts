@@ -20,6 +20,13 @@ export const useBoard = () => {
   };
 
   const addCards = (groupId: string) => {
+    const cardsInGroup = cards.filter(card => card.groupId === groupId);
+
+    if (cardsInGroup.length >= 5) {
+      alert('This group already has 5 cards');
+      return;
+    }
+
     const newCard: Card = {
       id: uuidv4(),
       groupId,

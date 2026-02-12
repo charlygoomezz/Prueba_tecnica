@@ -2,9 +2,15 @@ interface CreateButtonProps {
   onClick: () => void;
   label: string;
   variant?: 'group' | 'card';
+  disabled?: boolean;
 }
 
-export default function CreateButton({ onClick, label, variant = 'group' }: CreateButtonProps) {
+export default function CreateButton({
+  onClick,
+  label,
+  variant = 'group',
+  disabled,
+}: CreateButtonProps) {
   const baseStyles = 'transition-all font-medium flex items-center justify-center gap-2';
 
   const variants = {
@@ -14,7 +20,13 @@ export default function CreateButton({ onClick, label, variant = 'group' }: Crea
         rounded-lg text-sm font-bold transition-colors`,
   };
   return (
-    <button onClick={onClick} className={`${baseStyles} ${variants[variant]}`}>
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`${baseStyles} ${variants[variant]} ${
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      }`}
+    >
       {label}
     </button>
   );
